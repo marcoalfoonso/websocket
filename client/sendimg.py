@@ -7,6 +7,7 @@ async def send_video():
     async with websockets.connect(uri) as websocket:
 
         cap = cv2.VideoCapture(1,cv2.CAP_DSHOW)
+        frame = cv2.resize(frame, (320,240))
 
         while True:
             ret, frame = cap.read()
