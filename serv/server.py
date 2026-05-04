@@ -17,8 +17,11 @@ async def handler(websocket):
     finally:
         clients.remove(websocket)
 
-start_server = websockets.serve(handler,"0.0.0",PORT)
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
-    
+async def main():
+    async with websockets.serve(handler,"0.0.0.0",PORT):
+        print(f"Servidor WebSocket iniciado en el puerto {PORT}")
+        await asyncio.Future()  # Mantener el servidor en ejecución
+
+if __name__ == "__main__":
+    asyncio.run(main())
